@@ -20,3 +20,35 @@ for (pkg in pkgs){
 }
 #-------------------------
 
+# Klausur EDV 
+
+# Datensatz einlesen 
+library(readr)
+X2 <- read_csv("Documents/Universität/4. Semester/PSY_B_12-2 Computergestützte Datenanalyse II/Klausur/2.csv", 
+               na = "NA")
+View(X2)
+
+# Überblick über den Datensatz verschaffen 
+
+summary(X2)
+glimpse(X2)
+str(X2) # --> Alle quantitativen Variablen sind tatsächlich numerische Vektoren
+        # --> Alle kategorialen Variablen als character 
+skimr::skim(X2)
+
+# Fehlende WErte entfernen 
+
+dataWithoutNA <- X2 %>% 
+  drop_na()
+
+# Ausreißer filtern
+
+
+filteredData <- dataWithoutNA %>% 
+  filter(cat_keeper_friendliness >= 0 & cat_keeper_friendliness <= 100)
+
+
+dataWinsoriert <- dataWithoutNA %>%
+  mutate(across(cat_keeper_friendliness,
+                ~ifelse(. > 100,
+                        100, .)))
