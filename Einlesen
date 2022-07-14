@@ -1,0 +1,22 @@
+rm(list = ls()) #reinigen
+
+#----------------------------
+# create a list with needed libraries
+pkgs <- c("ggplot2", 
+          "tidyverse",
+          "skimr",
+          "plotly",
+          "car",
+          "magrittr",
+          "rgl",
+          "MASS")
+# load each listed library, check if it's already installed 
+# and install if necessary
+for (pkg in pkgs){
+  if(!require(pkg, character.only = TRUE)){
+    install.packages(pkg)
+    library(pkg, character.only = TRUE)
+  }
+}
+#-------------------------
+
